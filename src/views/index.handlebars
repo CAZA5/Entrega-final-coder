@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .contenedor{
+            display: flex;
+            justify-content: flex-start;
+
+        }
+        .product-card{
+            width: 20%;
+            height: auto;
+            background-color: blue;
+            color: white;
+            display: flex;
+            justify-content: flex-start;
+            flex-direction: column;
+            padding: 1rem;
+            border-radius: 4%;
+            margin: 1REM;
+        }
+
+        .ali{
+            width: 100%;
+
+            display:flex ;
+            flex-direction: column;
+            justify-content: flex-start;
+
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Productos</h1>
+
+    <h2>buscar por id</h2>
+    <p>Esciba la siguiente direccion</p>
+    <p>http://localhost:8080/products/id</p>
+    <p>http://localhost:8080/products/67210bbc1707433c28e4eea7</p>
+
+    <h3> Crear</h3>
+    <form method="post" action="/addProduct" id="formularioProductos">
+        <label>Nombre</label>
+        <input type="text" name="name" id="name">
+
+        <label>Descripcion</label>
+        <input type="text" name="descripcion" id="descripcion">
+
+        <label>Precio</label>
+        <input type="text" name="precio" id="precio">
+
+        <label>Thumbnail</label>
+        <input type="text" name="thumbnail" id="thumbnail">
+
+        <label>sku</label>
+        <input type="text" name="sku" id="sku">
+
+        <label>Stock</label>
+        <input type="text" name="stock" id="stock">
+
+        <button type="submit">Guardar</button>
+    </form>
+    
+    {{#each productos}}
+        <div class="ali">
+                <div class="product-card">
+                <p class="contenedor">{{name}}</p>
+                <p class="contenedor">{{descripcion}}</p> 
+                <p class="contenedor">Precio: ${{precio}}</p> 
+                <p class="contenedor">SKU: {{sku}}</p> 
+                <p class="contenedor">Stock disponible: {{stock}}</p>
+                <p class="contenedor">ID del Producto: {{_id}}</p> 
+                <form method="post" action="/products/delete">
+                <input type="submit" value="borrar" name = "{{_id}}">
+                
+
+                
+                </form>
+
+                                <form method="post" action="/products/actualizar">
+                
+                     
+                
+               
+              
+
+                
+                    
+                    <input type="text" name="name" id="name" placeholder="string: name">
+
+                    
+                    <input type="text" name="descripcion" id="descripcion" placeholder="string: descripcion">
+
+                    
+                    <input type="text" name="precio" id="precio" placeholder="number: precio">
+
+                    
+                    <input type="text" name="thumbnail" id="thumbnail" placeholder="string: thumbnail">
+
+                   
+                    <input type="text" name="sku" id="sku" placeholder="number: sku">
+
+                    
+                    <input type="text" name="stock" id="stock" placeholder="number: stock">
+
+                    
+                    <input type="text" name="{{_id}}" id="id" disabled placeholder="{{_id}}">
+
+
+                    <input type="submit" value="update" name = "{{_id}}">
+                    
+
+                </form>
+
+                
+
+
+            </div>
+        </div>
+
+            
+    {{/each}}
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
